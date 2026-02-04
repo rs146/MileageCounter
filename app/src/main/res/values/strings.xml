@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MileageCounter</string>
+    <string name="total_miles">Total Miles</string>
 </resources>
