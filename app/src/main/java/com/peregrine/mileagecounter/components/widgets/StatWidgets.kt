@@ -4,7 +4,10 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,8 +25,27 @@ import com.peregrine.mileagecounter.R
 import com.peregrine.mileagecounter.ui.theme.MileageCounterTheme
 
 @Composable
-fun TotalMiles(milesCompleted: Double) {
+fun Stats(milesCompleted: Double, journeysCompleted: Int, averageMilesPerTrip: Double) {
+    Row(
+        modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Box(modifier = Modifier.weight(1f)) {
+            TotalMiles(Modifier.fillMaxWidth(), milesCompleted)
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            JourneyCompleted(Modifier.fillMaxWidth(), journeysCompleted)
+        }
+        Box(modifier = Modifier.weight(1f)) {
+            AverageMilesPerMonth(Modifier.fillMaxWidth(), averageMilesPerTrip)
+        }
+    }
+}
+
+@Composable
+fun TotalMiles(modifier: Modifier = Modifier, milesCompleted: Double) {
     StatWidget(
+        modifier = modifier,
         icon = R.drawable.trending_up,
         text = R.string.total_miles,
         value = milesCompleted.toInt()
@@ -31,8 +53,9 @@ fun TotalMiles(milesCompleted: Double) {
 }
 
 @Composable
-fun JourneyCompleted(journeysCompleted: Int) {
+fun JourneyCompleted(modifier: Modifier = Modifier, journeysCompleted: Int) {
     StatWidget(
+        modifier = modifier,
         icon = R.drawable.trip,
         text = R.string.journeys_completed,
         value = journeysCompleted
@@ -40,9 +63,19 @@ fun JourneyCompleted(journeysCompleted: Int) {
 }
 
 @Composable
-fun StatWidget(@DrawableRes icon: Int, @StringRes text: Int, value: Int) {
+fun AverageMilesPerMonth(modifier: Modifier = Modifier, averageMilesPerTrip: Double) {
+    StatWidget(
+        modifier = modifier,
+        icon = R.drawable.average_target,
+        text = R.string.avg_miles_per_trip,
+        value = averageMilesPerTrip.toInt()
+    )
+}
+
+@Composable
+fun StatWidget(modifier: Modifier = Modifier, @DrawableRes icon: Int, @StringRes text: Int, value: Int) {
     Surface(
-        modifier = Modifier.padding(4.dp),
+        modifier = modifier.padding(4.dp),
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surface,
         tonalElevation = 2.dp,
@@ -90,5 +123,21 @@ fun PreviewTotalMiles() {
 fun PreviewJourneyCompleted() {
     MileageCounterTheme {
         JourneyCompleted(journeysCompleted = 1)
+    }
+}
+
+@Preview
+@Composable
+fun PreviewAverageMilesPerMonth() {
+    MileageCounterTheme {
+        AverageMilesPerMonth(averageMilesPerTrip = 32.0)
+    }
+}
+
+@Preview
+@Composable
+fun PreviewStats() {
+    MileageCounterTheme {
+        Stats(milesCompleted = 32.0, journeysCompleted = 1, averageMilesPerTrip = 32.0)
     }
 }
