@@ -247,10 +247,6 @@ data class ColorFamily(
     val colorContainer: Color,
     val onColorContainer: Color
 )
-
-val unspecified_scheme = ColorFamily(
-    Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
-)
 @Composable
 fun MileageCounterTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
