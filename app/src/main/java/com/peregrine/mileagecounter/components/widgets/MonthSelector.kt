@@ -41,7 +41,7 @@ fun MonthSelectorContainer(
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             MileageTrackerTitle()
             MonthSelector(currentMonth, currentYear, onPreviousMonthClick, onNextMonthClick)

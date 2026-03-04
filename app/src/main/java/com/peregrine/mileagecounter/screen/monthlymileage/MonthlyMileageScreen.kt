@@ -1,6 +1,7 @@
 package com.peregrine.mileagecounter.screen.monthlymileage
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -23,17 +24,21 @@ fun MonthlyMileageScreen(navController: NavController) {
             .background(color = MaterialTheme.colorScheme.background)
     ) {
         Column {
-            MonthSelectorContainer(
-                currentMonth = "March",
-                currentYear = 2026,
-                onPreviousMonthClick = { /* Handle previous month click */ },
-                onNextMonthClick = { /* Handle next month click */ }
-            )
-            Stats(
-                milesCompleted = 32.0,
-                journeysCompleted = 1,
-                averageMilesPerTrip = 32.0
-            )
+            Column(
+                verticalArrangement = Arrangement.spacedBy((-64).dp)
+            ) {
+                MonthSelectorContainer(
+                    currentMonth = "March",
+                    currentYear = 2026,
+                    onPreviousMonthClick = { /* Handle previous month click */ },
+                    onNextMonthClick = { /* Handle next month click */ }
+                )
+                Stats(
+                    milesCompleted = 32.0,
+                    journeysCompleted = 1,
+                    averageMilesPerTrip = 32.0
+                )
+            }
         }
     }
 }
