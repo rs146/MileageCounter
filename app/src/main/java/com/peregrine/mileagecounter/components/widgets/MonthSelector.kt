@@ -76,9 +76,12 @@ fun MileageTrackerTitle() {
 }
 
 @Composable
-fun MonthSelector(currentMonth: String, currentYear: Int,
-                  onPreviousMonthClick: () -> Unit = {},
-                  onNextMonthClick: () -> Unit = {}) {
+fun MonthSelector(
+    currentMonth: String,
+    currentYear: Int,
+    onPreviousMonthClick: () -> Unit = {},
+    onNextMonthClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .padding(4.dp)
@@ -111,9 +114,7 @@ fun MonthSelector(currentMonth: String, currentYear: Int,
             Icon(
                 modifier = Modifier
                     .size(24.dp)
-                    .background(
-                        color = Color.Transparent
-                    ),
+                    .background(color = Color.Transparent),
                 painter = painterResource(R.drawable.chevron_right),
                 contentDescription = stringResource(R.string.next_month),
                 tint = MaterialTheme.colorScheme.surface

@@ -6,4 +6,10 @@
     <string name="month_selector_title">Mileage Tracker</string>
     <string name="previous_month">Previous Month</string>
     <string name="next_month">Next Month</string>
+    <string name="journey_history">Journey History</string>
+    <plurals name="trips">
+        <item quantity="one">%1$d trip</item>
+        <item quantity="other">%1$d trips</item>
+    </plurals>
+
 </resources>
