@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">MileageCounter</string>
     <string name="total_miles">Total Miles</string>
+    <string name="miles">miles</string>
     <string name="journeys_completed">Journeys</string>
     <string name="avg_miles_per_trip">Avg per Trip</string>
     <string name="month_selector_title">Mileage Tracker</string>
     <string name="previous_month">Previous Month</string>
     <string name="next_month">Next Month</string>
     <string name="journey_history">Journey History</string>
+    <string name="delete_journey">Delete Journey</string>
     <plurals name="trips">
         <item quantity="one">%1$d trip</item>
         <item quantity="other">%1$d trips</item>

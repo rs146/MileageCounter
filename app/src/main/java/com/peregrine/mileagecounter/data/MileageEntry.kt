@@ -2,14 +2,14 @@ package com.peregrine.mileagecounter.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
+import java.time.LocalDateTime
 
 @Entity(tableName = "mileage_table")
 data class MileageEntry(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val date: Date,
+    val date: LocalDateTime,
     val mileage: Double,
     val from: String,
     val to: String,

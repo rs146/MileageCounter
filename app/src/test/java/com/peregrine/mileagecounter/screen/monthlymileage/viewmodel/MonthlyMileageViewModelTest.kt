@@ -8,8 +8,7 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Test
-import java.time.Instant
-import java.util.Date
+import java.time.LocalDateTime
 
 class MonthlyMileageViewModelTest {
 
@@ -30,7 +29,7 @@ class MonthlyMileageViewModelTest {
         coEvery { mileageRepository.insertMileageEntry(any()) } returns Unit
 
         val mockMileageEntry = MileageEntry(
-            date = Date.from(Instant.now()),
+            date = LocalDateTime.now(),
             mileage = 23.2,
             from = "Chelmsford",
             to = "London, Newbury Park",

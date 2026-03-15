@@ -1,13 +1,13 @@
 package com.peregrine.mileagecounter.util
 
 import androidx.room.TypeConverter
-import java.util.Date
+import java.time.LocalDateTime
 
 class Converters {
 
     @TypeConverter
-    fun fromTimestamp(value: Long?) : Date? = value?.let { Date(it) }
+    fun toDate(dateString: String?): LocalDateTime? = dateString?.let { LocalDateTime.parse(it) }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? = date?.time
+    fun toDateString(date: LocalDateTime?): String? = date?.let { date.toString() }
 }
