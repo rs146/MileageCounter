@@ -13,5 +13,8 @@
         <item quantity="one">%1$d trip</item>
         <item quantity="other">%1$d trips</item>
     </plurals>
+    <string name="start_end_location">From and destination information</string>
+    <string name="miles_for_this_trip">Miles completed for this trip</string>
+    <string name="to">To</string>
 
 </resources>

@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.peregrine.mileagecounter.R
@@ -67,7 +68,76 @@ fun JourneyCard(mileageEntry: MileageEntry) {
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
-        FirstRowMileageCard(mileageEntry)
+        Column(modifier = Modifier.padding(4.dp)) {
+            mileageEntry.apply {
+                FirstRowMileageCard(mileageEntry)
+                StartEndLocationRow(from, to)
+                JourneyCommentsRow(description)
+            }
+        }
+    }
+}
+
+@Composable
+fun JourneyCommentsRow(description: String) {
+    Row(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            modifier = Modifier.padding(start = 44.dp, end = 8.dp, bottom = 4.dp),
+            text = description,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
+}
+
+@Composable
+fun StartEndLocationRow(from: String, to: String) {
+    Row(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier
+                .padding(start = 12.dp, end = 8.dp, bottom = 4.dp)
+                .size(16.dp)
+                .background(
+                    color = Color.Transparent,
+                    shape = RoundedCornerShape(16.dp)
+                ),
+            painter = painterResource(id = R.drawable.location),
+            contentDescription = stringResource(R.string.start_end_location),
+            tint = Color.Gray
+        )
+        Text(
+            modifier = Modifier.padding(start = 8.dp, bottom = 4.dp),
+            text = from,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
+        Icon(
+            modifier = Modifier
+                .padding(start = 4.dp, end = 4.dp, bottom = 8.dp, top = 4.dp)
+                .size(10.dp)
+                .background(
+                    color = Color.Transparent
+                ),
+            painter = painterResource(id = R.drawable.arrow_forward),
+            contentDescription = stringResource(R.string.to),
+            tint = MaterialTheme.colorScheme.secondary
+        )
+        Text(
+            modifier = Modifier.padding(bottom = 4.dp),
+            text = to,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
     }
 }
 
@@ -91,7 +161,7 @@ fun FirstRowMileageCard(
                     shape = RoundedCornerShape(16.dp)
                 ),
             painter = painterResource(id = R.drawable.near_me),
-            contentDescription = "Total Miles",
+            contentDescription = stringResource(R.string.miles_for_this_trip),
             tint = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Column(
@@ -112,6 +182,7 @@ fun FirstRowMileageCard(
                     modifier = Modifier.alignByBaseline(),
                     text = "${mileageEntry.mileage.toInt()}",
                     style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
