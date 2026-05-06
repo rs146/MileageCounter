@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.peregrine.mileagecounter.components.widgets.JourneyHistoryHeader
 import com.peregrine.mileagecounter.components.widgets.MonthSelectorContainer
 import com.peregrine.mileagecounter.components.widgets.Stats
 import com.peregrine.mileagecounter.ui.theme.MileageCounterTheme
@@ -39,6 +41,7 @@ fun MonthlyMileageScreen(navController: NavController) {
                     averageMilesPerTrip = 32.0
                 )
             }
+            JourneyHistoryHeader()
         }
     }
 }

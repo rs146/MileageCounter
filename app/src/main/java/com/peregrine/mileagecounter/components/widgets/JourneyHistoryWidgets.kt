@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,7 +36,7 @@ import java.time.LocalDateTime
 fun JourneyHistoryHeader(tripsCompletedInMonth: Int = 0) {
     Row(
         modifier = Modifier
-            .padding(4.dp)
+            .padding(16.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -42,6 +44,7 @@ fun JourneyHistoryHeader(tripsCompletedInMonth: Int = 0) {
         Text(
             text = stringResource(R.string.journey_history),
             style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
         )
         Text(
@@ -57,7 +60,25 @@ fun JourneyHistoryHeader(tripsCompletedInMonth: Int = 0) {
 }
 
 @Composable
-fun JourneyCard(mileageEntry: MileageEntry) {
+fun JourneyList(
+    mileageEntries: List<MileageEntry>,
+    onDeleteMileageEntry: (MileageEntry) -> Unit = {}
+) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+        items(mileageEntries) { entry ->
+            JourneyCard(
+                mileageEntry = entry,
+                onDeleteMileageEntry = onDeleteMileageEntry
+            )
+        }
+    }
+}
+
+@Composable
+fun JourneyCard(
+    mileageEntry: MileageEntry,
+    onDeleteMileageEntry: (MileageEntry) -> Unit = {}
+) {
     Card(
         modifier = Modifier
             .padding(4.dp)
@@ -69,11 +90,9 @@ fun JourneyCard(mileageEntry: MileageEntry) {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
-            mileageEntry.apply {
-                FirstRowMileageCard(mileageEntry)
-                StartEndLocationRow(from, to)
-                JourneyCommentsRow(description)
-            }
+            FirstRowMileageCard(mileageEntry, onDeleteMileageEntry)
+            StartEndLocationRow(mileageEntry.from, mileageEntry.to)
+            JourneyCommentsRow(mileageEntry.description)
         }
     }
 }
@@ -219,6 +238,36 @@ fun FirstRowMileageCard(
 fun JourneyHistoryHeaderPreview() {
     MileageCounterTheme {
         JourneyHistoryHeader()
+    }
+}
+
+@Preview
+@Composable
+fun JourneyListPreview() {
+    val localDateTime = LocalDateTime.now()
+    val mileageEntries = listOf(
+        MileageEntry(
+            date = localDateTime,
+            mileage = 32.0,
+            from = "Chelmsford",
+            to = "Seven Kings",
+            description = "Along M25, M11",
+            month = localDateTime.monthValue,
+            year = localDateTime.year
+        ),
+        MileageEntry(
+            date = localDateTime.minusDays(1),
+            mileage = 15.5,
+            from = "London",
+            to = "Cambridge",
+            description = "Commute",
+            month = localDateTime.monthValue,
+            year = localDateTime.year
+        )
+    )
+
+    MileageCounterTheme {
+        JourneyList(mileageEntries = mileageEntries)
     }
 }
 
