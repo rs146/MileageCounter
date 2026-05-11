@@ -6,9 +6,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.peregrine.mileagecounter.screen.extendedhistory.ExtendedHistoryScreen
 import com.peregrine.mileagecounter.screen.monthlymileage.MonthlyMileageScreen
+import com.peregrine.mileagecounter.screen.monthlymileage.viewmodel.MonthlyMileageViewModel
 
 @Composable
-fun MileageAppNavigation() {
+fun MileageAppNavigation(
+    monthlyMileageViewModel: MonthlyMileageViewModel
+) {
     val navController = rememberNavController()
 
     NavHost(
@@ -16,7 +19,7 @@ fun MileageAppNavigation() {
         startDestination = MileageAppScreens.MonthlyMileageScreen.name
     ) {
         composable(MileageAppScreens.MonthlyMileageScreen.name) {
-            MonthlyMileageScreen(navController)
+            MonthlyMileageScreen(navController, monthlyMileageViewModel)
         }
 
         composable(MileageAppScreens.ExtendedHistoryScreen.name) {
